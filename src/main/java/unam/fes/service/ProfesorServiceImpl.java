@@ -1,4 +1,4 @@
-package unam.fes.service.profesor;
+package unam.fes.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,10 +20,6 @@ public class ProfesorServiceImpl implements ProfesorService {
         return  profesorRepository.save(profesor);
     }
 
-    @Override
-    public List<ProfesorEntity> findAll() {
-        return profesorRepository.findAll();
-    }
 
     @Override
     @Transactional
@@ -35,5 +31,14 @@ public class ProfesorServiceImpl implements ProfesorService {
     public ProfesorEntity findById(Long id) {
         Optional<ProfesorEntity> op = profesorRepository.findById(id);
         return op.orElse(null);
+    }
+
+    public ProfesorServiceImpl(ProfesorRepository profesorRepository) {
+        this.profesorRepository = profesorRepository;
+    }
+
+    @Override
+    public List<ProfesorEntity> findAll() {
+        return profesorRepository.findAllByOrderByNombreAsc();
     }
 }

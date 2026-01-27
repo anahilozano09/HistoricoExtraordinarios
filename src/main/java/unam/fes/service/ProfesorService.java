@@ -1,4 +1,4 @@
-package unam.fes.service.profesor;
+package unam.fes.service;
 
 import unam.fes.model.entity.ProfesorEntity;
 

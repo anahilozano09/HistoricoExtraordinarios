@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Histórico</title>
+    <link rel="stylesheet" th:href="@{/css/historico.css}">
+
+</head>
+
+
+<body>
+<div class="container">
+
+<h1>Consulta de Histórico</h1>
+
+<form method="get" th:action="@{/historico}">
+
+    <!-- Sinodal 1 -->
+    <label for="sinodal1Id">Sinodal 1:</label>
+    <select name="sinodal1Id" id="sinodal1Id">
+        <option value="">-- Todos --</option>
+        <option th:each="p : ${profesores}"
+                th:value="${p.id}"
+                th:text="${p.nombre}"
+                th:selected="${p.id == sinodal1Id}">
+        </option>
+    </select>
+
+    <br><br>
+
+    <!-- Sinodal 2 -->
+    <label for="sinodal2Id">Sinodal 2:</label>
+    <select name="sinodal2Id" id="sinodal2Id">
+        <option value="">-- Todos --</option>
+        <option th:each="p : ${profesores}"
+                th:value="${p.id}"
+                th:text="${p.nombre}"
+                th:selected="${p.id == sinodal2Id}">
+        </option>
+    </select>
+
+    <br><br>
+
+    <!-- Materia -->
+    <!-- Materia -->
+    <label for="claveMateria">Materia:</label>
+    <select name="claveMateria" id="claveMateria">
+        <option value="">-- Todas --</option>
+        <option th:each="m : ${materias}"
+                th:value="${m.claveMateria}"
+                th:text="${m.nombreMateria +  '&nbsp; &nbsp;' + '-::' + m.claveMateria + '::-'}"
+                th:selected="${m.claveMateria == claveMateria}">
+        </option>
+    </select>
+    <br><br>
+
+    <!-- Vuelta -->
+    <label for="idVuelta">Vuelta:</label>
+    <select name="idVuelta" id="idVuelta">
+        <option value="">-- Todas --</option>
+        <option th:each="v : ${vueltas}"
+                th:value="${v.id}"
+                th:text="${v.numVuelta}"
+                th:selected="${v.id == idVuelta}">
+        </option>
+    </select>
+
+    <br><br>
+
+    <!-- Semestre -->
+    <label for="semestreId">Semestre:</label>
+    <select name="semestreId" id="semestreId">
+        <option value="">-- Todos --</option>
+        <option th:each="s : ${semestres}"
+                th:value="${s.idSemestre}"
+                th:text="${s.semestre}"
+                th:selected="${s.idSemestre == semestreId}">
+        </option>
+    </select>
+
+    <br><br>
+
+    <button type="submit">Filtrar</button>
+
+    <a th:href="@{/historico}">
+        <button type="button">Limpiar filtros</button>
+    </a>
+
+</form>
+
+<hr>
+
+<h2>Resultados</h2>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>Sinodal 1</th>
+        <th>Sinodal 2</th>
+        <th>Materia</th>
+        <th>Clave</th>
+        <th>Vuelta</th>
+        <th>Semestre</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="h : ${historicos}">
+        <td th:text="${h.sinodal1.nombre}"></td>
+        <td th:text="${h.sinodal2.nombre}"></td>
+        <td th:text="${h.materia.nombreMateria}"></td>
+        <td th:text="${h.materia.claveMateria}"></td>
+        <td th:text="${h.vuelta.numVuelta}"></td>
+        <td th:text="${h.semestre.semestre}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<!-- Eliminar filtros vacíos antes de enviar -->
+<script>
+    document.querySelector("form").addEventListener("submit", function () {
+        this.querySelectorAll("select").forEach(select => {
+            if (!select.value) {
+                select.removeAttribute("name");
+            }
+        });
+    });
+</script>
+</div>
+</body>
+
+</html>
+
+
+
+

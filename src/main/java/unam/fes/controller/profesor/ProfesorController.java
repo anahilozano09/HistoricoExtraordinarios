@@ -8,7 +8,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import unam.fes.model.entity.ProfesorEntity;
-import unam.fes.service.profesor.ProfesorService;
+import unam.fes.service.ProfesorService;
 
 import java.util.List;
 
