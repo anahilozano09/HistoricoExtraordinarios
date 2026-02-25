@@ -24,7 +24,7 @@ public class ProfesorController {
         ProfesorEntity profesor = new ProfesorEntity();
         model.addAttribute("profesor", profesor);
         model.addAttribute("contenido", "Alta de profesor");
-        return "profesor/alta-profesor";
+        return "paginas/profesor/alta-profesor";
     }
 
     /// /profesor/guardar-profesor
@@ -34,12 +34,12 @@ public class ProfesorController {
             for(ObjectError error : result.getAllErrors()) {
                 System.out.println("Error: " + error.getDefaultMessage());
             }
-            return "profesor/alta-profesor";
+            return "paginas/profesor/alta-profesor";
         }
 
         profesorService.save(profesor);
         model.addAttribute("contenido", "Se almaceno con exito");
-        return "profesor/alta-profesor";
+        return "paginas/profesor/alta-profesor";
 
     }
 
@@ -49,7 +49,7 @@ public class ProfesorController {
         List<ProfesorEntity> lista=profesorService.findAll();
         model.addAttribute("lista",lista);
         model.addAttribute("contenido","Lista de Profesores");
-        return "profesor/lista-profesor";
+        return "paginas/profesor/lista-profesor";
     }
 
     @GetMapping("eliminar-profesor/{id}")
@@ -66,7 +66,7 @@ public class ProfesorController {
         ProfesorEntity profesor=profesorService.findById(id);
         model.addAttribute("profesor",profesor);
         model.addAttribute("contenido","Modificar profesor");
-        return "profesor/alta-profesor";
+        return "paginas/profesor/alta-profesor";
 
     }
 }
