@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Alta de Extraordinario</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+<main class="container mt-5">
+
+    <div class="card shadow-lg">
+        <div class="card-body">
+
+            <h2 class="text-center mb-4" th:text="${contenido}"></h2>
+
+            <form method="post"
+                  th:action="@{/historicoAlta/guardar-Extra}"
+                  th:object="${historico}">
+
+                <!-- ERRORES -->
+                <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+                    <ul class="mb-0">
+                        <li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
+                    </ul>
+                </div>
+
+                <div class="row g-3">
+
+                    <!-- SINODAL 1 -->
+                    <div class="col-md-6">
+                        <label class="form-label">Sinodal 1</label>
+                        <select class="form-select" th:field="*{sinodal1.id}" required>
+                            <option value="">Seleccione</option>
+                            <option th:each="sin1 : ${sinodal1}"
+                                    th:value="${sin1.id}"
+                                    th:text="${sin1.nombre}">
+                            </option>
+                        </select>
+                    </div>
+
+                    <!-- SINODAL 2 -->
+                    <div class="col-md-6">
+                        <label class="form-label">Sinodal 2</label>
+                        <select class="form-select" th:field="*{sinodal2.id}" required>
+                            <option value="">Seleccione</option>
+                            <option th:each="sin2 : ${sinodal2}"
+                                    th:value="${sin2.id}"
+                                    th:text="${sin2.nombre}">
+                            </option>
+                        </select>
+                    </div>
+
+                    <!-- SEMESTRE -->
+                    <div class="col-md-6">
+                        <label class="form-label">Semestre</label>
+                        <select class="form-select" th:field="*{semestre.idSemestre}" required>
+                            <option value="">Seleccione</option>
+                            <option th:each="sem : ${semestre}"
+                                    th:value="${sem.idSemestre}"
+                                    th:text="${sem.semestre}">
+                            </option>
+                        </select>
+                    </div>
+
+                    <!-- VUELTA -->
+                    <div class="col-md-6">
+                        <label class="form-label">Vuelta</label>
+                        <select class="form-select" th:field="*{vuelta.id}" required>
+                            <option value="">Seleccione</option>
+                            <option th:each="vuelt : ${vuelta}"
+                                    th:value="${vuelt.id}"
+                                    th:text="${vuelt.numVuelta}">
+                            </option>
+                        </select>
+                    </div>
+
+                    <!-- MATERIA (VARCHAR) -->
+                    <div class="col-md-12">
+                        <label class="form-label">Materia</label>
+                        <select class="form-select" th:field="*{materia.claveMateria}" required>
+                            <option value="">Seleccione</option>
+                            <option th:each="mat : ${materia}"
+                                    th:value="${mat.claveMateria}"
+                                    th:text="${mat.nombreMateria}">
+                            </option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <!-- BOTÓN -->
+                <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-primary px-5">
+                        Guardar
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+</main>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
