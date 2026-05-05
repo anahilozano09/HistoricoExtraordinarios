@@ -7,9 +7,10 @@ import unam.fes.model.entity.SemestreEntity;
 import java.util.List;
 
 @Repository
-public interface SemestreRepository extends JpaRepository<SemestreEntity, Integer> {
+public interface SemestreRepository extends JpaRepository<SemestreEntity, Long> {
 
     List<SemestreEntity> findAllByOrderBySemestreAsc();
+    
 }
 
 

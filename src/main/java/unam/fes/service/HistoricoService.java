@@ -14,6 +14,8 @@ public interface HistoricoService {
             Integer semestreId
     );
 
+    HistoricoEntity save(HistoricoEntity historico);
+
 }
 
 

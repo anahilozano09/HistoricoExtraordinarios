@@ -34,6 +34,12 @@ public class HistoricoServiceImpl implements HistoricoService {
                 idSemestre
         );
     }
+
+    @Override
+    @Transactional
+    public HistoricoEntity save(HistoricoEntity historico){
+        return historicoRepository.save(historico);
+    }
 }
 
 
